@@ -193,7 +193,7 @@ main {
     max-width: 70%;
 }
 
-#movie-title {
+.movie-title {
     background-color: rgba(0, 0, 0, .7);
     width: 100%
 }

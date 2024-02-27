@@ -7,7 +7,10 @@ function closeModal() {
         }
     }
 }
-fetch(`http://127.0.0.1:8000/api/v1/titles/?sort_by=-imdb_score&page_size=2`)
+
+
+function getBestMovie () {
+    fetch(`http://127.0.0.1:8000/api/v1/titles/?sort_by=-imdb_score&page_size=2`)
     .then((response) => response.json())
     .then((data) => {
         const bestMovieList = data.results;
@@ -34,38 +37,44 @@ fetch(`http://127.0.0.1:8000/api/v1/titles/?sort_by=-imdb_score&page_size=2`)
         mainMovie.style.backgroundImage = `url('${finalBackgroundImage}')`;
     })
 })
+}
 
-fetch(`http://127.0.0.1:8000/api/v1/titles/?sort_by=-imdb_score&page_size=7`)
+
+function getMoviesByImdb() {
+    fetch(`http://127.0.0.1:8000/api/v1/titles/?sort_by=-imdb_score&page_size=7`)
     .then((response) => response.json())
     .then((data) => {
         const bestMovies = data.results;
 
-        let main_section = document.getElementById('Best movies')
+        let main_section = document.getElementById('best-movies-wrapper')
         main_section.innerHTML += '<h2>Films les mieux notés</h2>'
         main_section.innerHTML +=
-            `<section class="wrapper">\n` +
+            `<div class="wrapper">\n` +
             `<div class="overlay-previous"><img class="fill" alt="angle-left" src="images/angle-left-solid.svg"></div>\n` +
-            `   <section class="category" id="Best movies">\n` +
+            `   <section class="category" id="best-movies">\n` +
             '       <div class="movie"></div>\n'.repeat(7) +
             '   </section>\n' +
             '   <div class="overlay-next"><img class="fill" alt="angle-right" src="images/angle-right-solid.svg"></div>\n' +
-            '</section>';
-        let section = document.getElementById("Best movies")
+            '</div>';
+        let section = document.getElementById("best-movies-wrapper")
         let movieDivs = section.querySelectorAll('.movie');
         bestMovies.forEach((movieItem, index) => {
             movieDivs[index].id = `${movieItem.id}`
             movieDivs[index].style.backgroundImage = `url('${movieItem.image_url}')`;
-            movieDivs[index].innerHTML = `<div id="movie-title"><h3>${movieItem.title}</h3></div>`;
+            movieDivs[index].innerHTML = `<div class="movie-title"><h3>${movieItem.title}</h3></div>`;
             movieDivs[index].addEventListener('click', () => {
                 openModal(movieItem);
             })
         })
-        slideRightMovieCategory()
+        slideMovieCategory()
     })
+}
 
-fetch("http://127.0.0.1:8000/api/v1/genres/?page_size=100")
-  .then((response) => response.json())
-  .then((data) => {
+
+function getMoviesCategories() {
+    fetch("http://127.0.0.1:8000/api/v1/genres/?page_size=100")
+        .then((response) => response.json())
+        .then((data) => {
       const genres = data.results;
       const selectedGenres = genres.filter(item =>
           item.name === 'Action' || item.name === 'Biography' || item.name === 'Romance'
@@ -75,13 +84,13 @@ fetch("http://127.0.0.1:8000/api/v1/genres/?page_size=100")
           let main_section = document.getElementsByTagName("main")[0];
           main_section.innerHTML += `<h2>${item.name}</h2>`;
           main_section.innerHTML +=
-              `<section class="wrapper">\n` +
+              `<div class="wrapper">\n` +
               `<div class="overlay-previous"><img class="fill" alt="angle-left" src="images/angle-left-solid.svg"></div>\n` +
               `   <section class="category" id="${item.name}">\n` +
               '       <div class="movie"></div>\n'.repeat(7) +
               '   </section>\n' +
               '   <div class="overlay-next"><img class="fill" alt="angle-right" src="images/angle-right-solid.svg"></div>\n' +
-              '</section>';
+              '</div>';
 
           fetch(`http://127.0.0.1:8000/api/v1/titles/?genre=${item.name}&sort_by=-votes&page=1&page_size=7`)
             .then ((response) => response.json())
@@ -93,7 +102,7 @@ fetch("http://127.0.0.1:8000/api/v1/genres/?page_size=100")
                 titles.forEach((movieItem, index) => {
                         movieDivs[index].id = `${movieItem.id}`
                         movieDivs[index].style.backgroundImage = `url('${movieItem.image_url}')`;
-                        movieDivs[index].innerHTML = `<div id="movie-title"><h3>${movieItem.title}</h3></div>`;
+                        movieDivs[index].innerHTML = `<div class="movie-title"><h3>${movieItem.title}</h3></div>`;
                         movieDivs[index].addEventListener('click', () => {
                             openModal(movieItem);
 
@@ -102,14 +111,18 @@ fetch("http://127.0.0.1:8000/api/v1/genres/?page_size=100")
             })
       });
   })
-  // slideRightMovieCategory()
   })
+}
+
 
 function openModal(movieItem) {
     fetch(`http://127.0.0.1:8000/api/v1/titles/${movieItem.id}`)
         .then((response) => response.json())
         .then((movieDetails) => {
     var modal = document.getElementById("myModal");
+    if(movieDetails.worldwide_gross_income == null){
+        movieDetails.worldwide_gross_income = "N/A";
+    }
     modal.style.display = "block";
     modal.innerHTML = `<div class="modal-content">
         <span class="close">&times;</span>
@@ -135,7 +148,8 @@ function openModal(movieItem) {
     })
 }
 
-function slideRightMovieCategory() {
+
+function slideMovieCategory() {
     let anglesRight = document.getElementsByClassName('overlay-next')
     let anglesLeft = document.getElementsByClassName('overlay-previous')
     for(let i=0; i<anglesRight.length;i++){
@@ -154,3 +168,7 @@ function slideRightMovieCategory() {
     }
 
 }
+
+getBestMovie()
+getMoviesByImdb()
+getMoviesCategories()
