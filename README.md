@@ -28,5 +28,8 @@ css
 
 ### Browsers compatibility
 ![chrome](images/chrome.png)
+chrome
 ![firefox](images/firefox.png)
+firefox
 ![opera](images/opera.png)
+opera
