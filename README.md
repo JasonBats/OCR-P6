@@ -21,15 +21,15 @@ script.js: This file handles the generation of HTML and CSS elements, as well as
 
 ### w3c validation :
 ![w3c hmtl](images/w3c-html.png)
-html
+html//
 
 ![w3c css](images/w3c-css.png)
-css
+css//
 
 ### Browsers compatibility
 ![chrome](images/chrome.png)
-chrome
+chrome//
 ![firefox](images/firefox.png)
-firefox
+firefox//
 ![opera](images/opera.png)
-opera
+opera//
