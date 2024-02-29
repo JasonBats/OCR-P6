@@ -50,11 +50,11 @@ function getMoviesByImdb() {
         main_section.innerHTML += '<h2>Films les mieux notés</h2>'
         main_section.innerHTML +=
             `<div class="wrapper">\n` +
-            `<div class="overlay-previous"><img class="fill" alt="angle-left" src="images/angle-left-solid.svg"></div>\n` +
+            `<div class="overlay-previous"><img class="fill" alt="arrow-left" src="images/angle-left-solid.svg"></div>\n` +
             `   <section class="category" id="best-movies">\n` +
             '       <div class="movie"></div>\n'.repeat(7) +
             '   </section>\n' +
-            '   <div class="overlay-next"><img class="fill" alt="angle-right" src="images/angle-right-solid.svg"></div>\n' +
+            '   <div class="overlay-next"><img class="fill" alt="arrow-right" src="images/angle-right-solid.svg"></div>\n' +
             '</div>';
         let section = document.getElementById("best-movies-wrapper")
         let movieDivs = section.querySelectorAll('.movie');
@@ -85,11 +85,11 @@ function getMoviesCategories() {
           main_section.innerHTML += `<h2>${item.name}</h2>`;
           main_section.innerHTML +=
               `<div class="wrapper">\n` +
-              `<div class="overlay-previous"><img class="fill" alt="angle-left" src="images/angle-left-solid.svg"></div>\n` +
+              `<div class="overlay-previous"><img class="fill" alt="arrow-left" src="images/angle-left-solid.svg"></div>\n` +
               `   <section class="category" id="${item.name}">\n` +
               '       <div class="movie"></div>\n'.repeat(7) +
               '   </section>\n' +
-              '   <div class="overlay-next"><img class="fill" alt="angle-right" src="images/angle-right-solid.svg"></div>\n' +
+              '   <div class="overlay-next"><img class="fill" alt="arrow-right" src="images/angle-right-solid.svg"></div>\n' +
               '</div>';
 
           fetch(`http://127.0.0.1:8000/api/v1/titles/?genre=${item.name}&sort_by=-votes&page=1&page_size=7`)
@@ -150,17 +150,17 @@ function openModal(movieItem) {
 
 
 function slideMovieCategory() {
-    let anglesRight = document.getElementsByClassName('overlay-next')
-    let anglesLeft = document.getElementsByClassName('overlay-previous')
-    for(let i=0; i<anglesRight.length;i++){
-        anglesRight[i].addEventListener('click', (event) => {
+    let arrowsRight = document.getElementsByClassName('overlay-next')
+    let arrowsLeft = document.getElementsByClassName('overlay-previous')
+    for(let i=0; i<arrowsRight.length;i++){
+        arrowsRight[i].addEventListener('click', (event) => {
             let parent = event.target.parentElement
             console.log(event)
             parent.children[1].scrollLeft += 250;
         })
     }
-    for(let i=0; i<anglesLeft.length;i++){
-        anglesLeft[i].addEventListener('click', (event) => {
+    for(let i=0; i<arrowsLeft.length;i++){
+        arrowsLeft[i].addEventListener('click', (event) => {
             let parent = event.target.parentElement
             console.log(event)
             parent.children[1].scrollLeft -= 250;
