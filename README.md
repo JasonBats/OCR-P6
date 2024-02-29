@@ -24,7 +24,7 @@ script.js: This file handles the generation of HTML and CSS elements, as well as
 html
 
 ![w3c css](images/w3c-css.png)
-html
+css
 
 ### Browsers compatibility
 ![chrome](images/chrome.png)
