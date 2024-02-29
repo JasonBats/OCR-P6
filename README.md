@@ -14,22 +14,28 @@ How to run project :
 Files description :
 ===============
 
-index.hmtl > This file serves as the structural framework for the web application, containing the HTML markup that defines the layout and content elements of the user interface.
-style.css > This file provides the styling for the web application, defining CSS rules that control the appearance of HTML elements, including colors, fonts, and layout properties.
-script.js: This file handles the generation of HTML and CSS elements, as well as the creation of dynamic elements based on data retrieved from the API.
+**index.hmtl** > This file serves as the structural framework for the web application, containing the HTML markup that defines the layout and content elements of the user interface.
+
+**style.css** > This file provides the styling for the web application, defining CSS rules that control the appearance of HTML elements, including colors, fonts, and layout properties.
+
+**script.js** > This file handles the generation of HTML and CSS elements, as well as the creation of dynamic elements based on data retrieved from the API.
 
 
 ### w3c validation :
 ![w3c hmtl](images/w3c-html.png)
-html//
+HTML
+
 
 ![w3c css](images/w3c-css.png)
-css//
+CSS
 
 ### Browsers compatibility
 ![chrome](images/chrome.png)
-chrome//
+**Chrome 122.0.6261.94 (Build officiel) (64 bits)**
+
 ![firefox](images/firefox.png)
-firefox//
+**Firefox 123.0 (64 bits)**
+
 ![opera](images/opera.png)
-opera//
+**Opera GX LVL5 (core: 107.0.5045.37)**
+
